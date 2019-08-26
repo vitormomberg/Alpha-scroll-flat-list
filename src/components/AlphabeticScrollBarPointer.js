@@ -43,7 +43,7 @@ const styles = {
     },
     letter: {
         fontSize: 20,
-        fontWeight: 'bold', 
+        fontWeight: 'bold',
         color: '#fff',
         alignSelf: 'center',
         textAlign: 'center',

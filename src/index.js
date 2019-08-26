@@ -13,6 +13,7 @@ export default class AlphaScrollFlatList extends Component {
         this.state = {
             activeLetterViewTop: 0,
             activeLetter: undefined,
+            lastLetter: undefined,
             isPortrait: this.isPortrait()
         };
 
@@ -66,6 +67,7 @@ export default class AlphaScrollFlatList extends Component {
 
             this.setState({
                 activeLetter: letter,
+                lastLetter: letter,
                 activeLetterViewTop
             });
 
@@ -81,7 +83,7 @@ export default class AlphaScrollFlatList extends Component {
             }
 
             if (index !== -1)
-                this.list.scrollToOffset({ animated: false, offset: index * this.props.itemHeight });
+                this.list.scrollToIndex({ animated: false, index });
         }
     }
 
@@ -134,6 +136,7 @@ export default class AlphaScrollFlatList extends Component {
                         fontSizeMultiplier={this.props.scrollBarFontSizeMultiplier}
                         onScroll={debounce(this.handleOnScroll.bind(this))}
                         onScrollEnds={debounce(this.handleOnScrollEnds.bind(this))}
+                        letterActive={this.state.lastLetter}
                     />
                 )}
                 {this.state.activeLetter && !this.props.hideSideBar

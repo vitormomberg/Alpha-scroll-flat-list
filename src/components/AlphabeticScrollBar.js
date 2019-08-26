@@ -31,7 +31,7 @@ class AlphabeticScrollBar extends Component {
     componentWillReceiveProps (newProps) {
         if (newProps.reverse !== this.props.reverse) {
             const alphabet = newProps.reverse ? [...ALPHABET].reverse() : ALPHABET;
-            
+
             this.setState({
                 alphabet
             });
@@ -62,7 +62,7 @@ class AlphabeticScrollBar extends Component {
         this.setState({
             activeLetter
         });
-        
+
         this.props.onScroll(activeLetter, this.state.activeLetterViewTop);
     }
 
@@ -96,7 +96,8 @@ class AlphabeticScrollBar extends Component {
                         <Text style={{
                             ...styles.letter,
                             ...this.props.fontColor ? {color: this.props.fontColor} : {},
-                            fontSize: ResponsiveFontSize(this.props.isPortrait ? 2 : 1.6) * this.props.fontSizeMultiplier, 
+                            fontFamily: this.props.letterActive === letter ? "Gotham-Bold" : "Gotham-Medium",
+                            fontSize: ResponsiveFontSize(this.props.isPortrait ? 2 : 1.6) * this.props.fontSizeMultiplier,
                         }}>
                             {letter}
                         </Text>
@@ -112,15 +113,16 @@ const styles = {
         width: 30,
         position: 'absolute',
         right: 0,
-        top: 0,
-        bottom: 0,
+        top: 10,
+        bottom: 10,
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center'
     },
     letter: {
         alignSelf: 'center',
-        fontWeight: 'bold'
+        fontWeight: 'normal',
+        fontFamily: 'Gotham-Bold'
     }
 };
 

@@ -119,12 +119,20 @@ export default class AlphaScrollFlatList extends Component {
             });
     }
 
+    onViewableItemsChanged = (e) => {
+      const viewable = e.viewableItems[0];
+      if (viewable && viewable.item && viewable.item.title) {
+        this.setState({ lastLetter: viewable.item.title })
+      }
+    }
+
     render () {
         return (
             <View onLayout={this.handleOnLayout.bind(this)}>
                 <FlatList
                     {...this.props}
                     ref={elem => this.list = elem}
+                    onViewableItemsChanged={this.onViewableItemsChanged}
                 />
                 {this.props.hideSideBar ? null : (
                     <AlphabeticScrollBar

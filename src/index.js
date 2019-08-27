@@ -67,7 +67,6 @@ export default class AlphaScrollFlatList extends Component {
 
             this.setState({
                 activeLetter: letter,
-                lastLetter: letter,
                 activeLetterViewTop
             });
 
@@ -87,7 +86,7 @@ export default class AlphaScrollFlatList extends Component {
         }
     }
 
-    handleOnScrollEnds () {
+    handleOnScrollEnds = () => {
         this.setState({
             activeLetter: undefined,
             activeLetterViewTop: 0

@@ -71,10 +71,10 @@ class AlphabeticScrollBar extends Component {
 
     handleOnFingerStop () {
         this.setState({
-            activeLetter: undefined
+            activeLetter: undefined,
         });
 
-        this.props.onScrollEnds();
+        this.props.onScrollEnds(this.state.activeLetter);
     }
 
     handleOnLayout () {

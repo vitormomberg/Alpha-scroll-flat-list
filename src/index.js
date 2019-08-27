@@ -86,10 +86,11 @@ export default class AlphaScrollFlatList extends Component {
         }
     }
 
-    handleOnScrollEnds = () => {
+    handleOnScrollEnds (letter) {
         this.setState({
             activeLetter: undefined,
-            activeLetterViewTop: 0
+            activeLetterViewTop: 0,
+            lastLetter: letter,
         }, () => this.props.onScrollEnds());
     }
 
@@ -121,6 +122,7 @@ export default class AlphaScrollFlatList extends Component {
     onViewableItemsChanged = (e) => {
       const viewable = e.viewableItems[0];
       if (viewable && viewable.item && viewable.item.title) {
+        console.log('oiii')
         this.setState({ lastLetter: viewable.item.title })
       }
     }

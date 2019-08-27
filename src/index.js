@@ -145,6 +145,7 @@ export default class AlphaScrollFlatList extends Component {
                         onScroll={debounce(this.handleOnScroll.bind(this))}
                         onScrollEnds={debounce(this.handleOnScrollEnds.bind(this))}
                         letterActive={this.state.lastLetter}
+                        keys={this.props.keys}
                     />
                 )}
                 {this.state.activeLetter && !this.props.hideSideBar

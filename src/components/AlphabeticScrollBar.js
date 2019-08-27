@@ -10,11 +10,14 @@ class AlphabeticScrollBar extends Component {
     constructor (props) {
         super(props);
 
+        this.alphabet = props.keys ? props.keys.split('') : ALPHABET;
+
         this.state = {
             activeLetter: undefined,
             activeLetterViewTop: 0,
-            alphabet: props.reverse ? [...ALPHABET].reverse() : ALPHABET
+            alphabet: props.reverse ? [...this.alphabet].reverse() : this.alphabet
         };
+
     }
 
     componentWillMount() {
@@ -30,7 +33,7 @@ class AlphabeticScrollBar extends Component {
 
     componentWillReceiveProps (newProps) {
         if (newProps.reverse !== this.props.reverse) {
-            const alphabet = newProps.reverse ? [...ALPHABET].reverse() : ALPHABET;
+            const alphabet = newProps.reverse ? [...this.alphabet].reverse() : this.alphabet;
 
             this.setState({
                 alphabet
@@ -85,25 +88,25 @@ class AlphabeticScrollBar extends Component {
 
     render() {
         return (
-            <View
-                ref={elem => this.alphabetContainer = elem}
-                {...this.panResponder.panHandlers}
-                onLayout={this.handleOnLayout.bind(this)}
-                style={[styles.container, this.props.scrollBarContainerStyle]}
-            >
-                {this.state.alphabet.map(letter => (
-                    <View key={letter}>
-                        <Text style={{
-                            ...styles.letter,
-                            ...this.props.fontColor ? {color: this.props.fontColor} : {},
-                            fontFamily: this.props.letterActive === letter ? "Gotham-Bold" : "Gotham-Medium",
-                            fontSize: ResponsiveFontSize(this.props.isPortrait ? 2 : 1.6) * this.props.fontSizeMultiplier,
-                        }}>
-                            {letter}
-                        </Text>
-                    </View>
-                ))}
-            </View>
+          <View
+              ref={elem => this.alphabetContainer = elem}
+              {...this.panResponder.panHandlers}
+              onLayout={this.handleOnLayout.bind(this)}
+              style={[styles.container, this.props.scrollBarContainerStyle]}
+          >
+              {this.state.alphabet.map(letter => (
+                  <View key={letter} style={{width: '100%'}}>
+                      <Text style={{
+                          ...styles.letter,
+                          ...this.props.fontColor ? {color: this.props.fontColor} : {},
+                          fontFamily: this.props.letterActive === letter ? "Gotham-Bold" : "normal",
+                          fontSize: ResponsiveFontSize(this.props.isPortrait ? 2 : 1.6) * this.props.fontSizeMultiplier,
+                      }}>
+                          {letter}
+                      </Text>
+                  </View>
+              ))}
+          </View>
         );
     }
 }
@@ -113,8 +116,7 @@ const styles = {
         width: 30,
         position: 'absolute',
         right: 0,
-        top: 10,
-        bottom: 10,
+        top: 0,
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center'
